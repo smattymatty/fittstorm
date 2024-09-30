@@ -1,0 +1,66 @@
+{% load static %}
+<div id="exercise-list"></div>
+<div class="ba-card ba-shadow-hover ba-border-gradient ba-min-h-100">
+    <div class="ba-w-100 ba-flex ba-justify-between ba-items-center">
+        <h2 class="ba-card-header ba-w-100 ba-pb-2 ba-border-bottom-accent ba-mb-4">Your Exercises</h2>
+        {% if request.htmx %}
+            <a href="{% url 'workouts:exercise_user_list' %}"
+               onclick="return confirm('Leave this page?')"
+               class="ba-btn ba-opacity-50 ba-component-title ba-text-center ba-px-3 ba-py-2">
+                {% include 'BaseApp/svg/expand.html' %}
+            </a>
+        {% endif %}
+    </div>
+    <ul class="ba-list-unstyled ba-80vh-container">
+        {% for exercise in exercises %}
+            <li class=" exercise-list-item ba-list-item ba-border-bottom ba-px-3 ba-py-4 ba-pointer-cursor ba-border-dashed-hover ba-pr-4-hover ba-pl-4-hover ba-workout-type-{{ exercise.exercise.exercise_type }}"
+                {% if request.htmx %} hx-get="{% url 'workouts:exercise_detail' exercise.pk %}" hx-target="#workout-main-detail" {% endif %}
+                hx-swap="innerHTML"
+                hx-trigger="mousedown">
+                <div class="ba-flex ba-justify-between ba-items-center">
+                    <span class="ba-flex-grow ba-flex ba-items-center">
+                        <span class="ba-workout-type-icon ba-icon-bg-dark">
+                            {% if exercise.exercise_type == 'strength' %}
+                                💪
+                            {% elif exercise.exercise_type == 'cardio' %}
+                                🏃‍♂️
+                            {% elif exercise.exercise_type == 'yoga' %}
+                                🧘‍♀️
+                            {% else %}
+                                🏋️‍♂️
+                            {% endif %}
+                        </span>
+                        <strong class="ba-text-bold">{{ exercise.name }}</strong>
+                        <span class="ba-flex-grow ba-pill ba-bg-accent ba-text-white ba-ml-2">{{ exercise.get_exercise_type_display }}</span>
+                        <span class="ba-flex ba-calorie-badge ba-ml-2">{{ exercise.estimated_calories_per_rep }} cal</span>
+                    </span>
+                </div>
+            </li>
+        {% empty %}
+            <li class="ba-text-center ba-py-4 ba-text-muted">No exercises yet. Start by creating a new workout!</li>
+        {% endfor %}
+    </ul>
+</div>
+{% if request.htmx %}
+    {% block extra_js %}
+        <script type="module">
+    import {scrollToTopAddClassThenRemove} from "{% static 'BaseApp/utils.mjs' %}";
+    console.log(scrollToTopAddClassThenRemove)
+    console.log("yoo");
+    const exerciseListItems = document.querySelectorAll('.exercise-list-item');
+    console.log(exerciseListItems);
+    exerciseListItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+            scrollToTopAddClassThenRemove(
+                document.getElementById('workout-main-detail'), 
+                'transition-in',
+                300,
+                1000,
+                12,
+                "rem"
+                );
+        });
+    });
+        </script>
+    {% endblock %}
+{% endif %}

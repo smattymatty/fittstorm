@@ -1,0 +1,81 @@
+{% load static %}
+<div id="exercise-detail">
+    <div class="ba-container ba-my-5">
+        <h1 class="ba-text-center ba-mb-4 ba-component-title">{{ exercise.name }}</h1>
+        <!-- Exercise Details Section -->
+        <div class="ba-card ba-mb-4">
+            <div class="ba-card-header ba-flex ba-justify-between ba-items-center">
+                <h2 class="ba-m-0">Exercise Details</h2>
+                <span class="ba-pill ba-bg-gradient-food">{{ exercise.date }}</span>
+            </div>
+            <div class="ba-card-body">
+                <p>
+                    <strong>Estimated Calories per Rep:</strong> {{ exercise.estimated_calories_per_rep }}
+                </p>
+                <p>
+                    <strong>Notes:</strong> {{ exercise.notes|default:"No notes provided" }}
+                </p>
+            </div>
+        </div>
+        <!-- Exercises Section -->
+        <div class="ba-card ba-mb-4">
+            <div class="ba-card-header ba-flex ba-justify-between ba-items-center">
+                <h2 class="ba-m-0">Exercises</h2>
+            </div>
+            <div class="ba-card-body ba-exercise-list">
+                {% for workout_exercise in exercise.workoutexercise_set.all %}
+                    <div class="ba-exercise-item ba-mb-3 ba-border-bottom ba-pb-3">
+                        <h3 class="ba-mb-2">
+                            {{ workout_exercise.sets }} sets x {{ workout_exercise.reps }} reps @ {{ workout_exercise.weight }} kg
+                        </h3>
+                        <div class="ba-flex ba-flex-wrap">
+                            <!-- Strength Exercise Fields -->
+                            {% if workout_exercise.exercise.exercise_type == 'strength' %}
+                                <div class="ba-w-33 ba-mobile-w-100 ba-mb-2">
+                                    <strong>Sets:</strong> {{ workout_exercise.sets }}
+                                </div>
+                                <div class="ba-w-33 ba-mobile-w-100 ba-mb-2">
+                                    <strong>Reps:</strong> {{ workout_exercise.reps }}
+                                </div>
+                                <div class="ba-w-33 ba-mobile-w-100 ba-mb-2">
+                                    <strong>Weight:</strong> {{ workout_exercise.weight|default:"N/A" }} kg
+                                </div>
+                                <!-- Cardio Exercise Fields -->
+                            {% elif workout_exercise.exercise.exercise_type == 'cardio' %}
+                                <div class="ba-w-50 ba-mobile-w-100 ba-mb-2">
+                                    <strong>Distance:</strong> {{ workout_exercise.distance|default:"N/A" }} km
+                                </div>
+                                <div class="ba-w-50 ba-mobile-w-100 ba-mb-2">
+                                    <strong>Duration:</strong> {{ workout_exercise.duration|default:"N/A" }}
+                                </div>
+                            {% endif %}
+                            <div class="ba-w-100 ba-mb-2">
+                                <strong>Rest Time:</strong> {{ workout_exercise.rest_time|default:"N/A" }}
+                            </div>
+                            {% if workout_exercise.notes %}
+                                <div class="ba-w-100">
+                                    <strong>Notes:</strong> {{ workout_exercise.notes }}
+                                </div>
+                            {% endif %}
+                            <!-- Remove Exercise Button with Confirmation -->
+                            <div class="ba-w-100 ba-mt-2">
+                                <form action="{% url 'workouts:remove_exercise' workout_exercise.id %}"
+                                      method="post"
+                                      onsubmit="return confirm('Are you sure you want to remove this exercise?');">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                            class="ba-btn ba-btn-outline ba-btn-sm ba-remove-exercise">Remove</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No exercises recorded for this exercise.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'workouts_app/workouts_app.css' %}">
+{% endblock %}

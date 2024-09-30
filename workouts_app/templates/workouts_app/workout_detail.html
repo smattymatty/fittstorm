@@ -1,0 +1,181 @@
+{% load static %}
+<div id="workout-detail">
+    <div class="ba-container ba-my-5">
+        <h1 class="ba-text-center ba-mb-4 ba-component-title">{{ workout.user.username }}'s {{ workout.name }}</h1>
+        <!-- Workout Details Section -->
+        <div class="ba-card ba-mb-4">
+            <div class="ba-card-header ba-flex ba-justify-between ba-items-center">
+                <h2 class="ba-m-0">Workout Details</h2>
+                <span class="ba-pill ba-bg-gradient-food">{{ workout.date }}</span>
+            </div>
+            <div class="ba-card-body">
+                <p>
+                    <strong>Duration:</strong> {{ workout.duration }}
+                </p>
+                <p>
+                    <strong>Estimated Calories:</strong> {{ workout.estimated_calories }}
+                </p>
+                <p>
+                    <strong>Notes:</strong> {{ workout.notes|default:"No notes provided" }}
+                </p>
+            </div>
+        </div>
+        <!-- Exercises Section -->
+        <div class="ba-card ba-mb-4">
+            <div class="ba-card-header ba-flex ba-justify-between ba-items-center">
+                <h2 class="ba-m-0">Exercises</h2>
+                <button class="ba-btn ba-btn-outline ba-toggle-exercises">Show/Hide</button>
+            </div>
+            <div class="ba-card-body ba-exercise-list ba-hidden">
+                {% for workout_exercise in workout.workout_exercises.all %}
+                    <div class="ba-exercise-item ba-mb-3 ba-border-bottom ba-pb-3">
+                        <h3 class="ba-mb-2">
+                            {{ workout_exercise.exercise.name }} ({{ workout_exercise.exercise.get_exercise_type_display }})
+                        </h3>
+                        <div class="ba-flex ba-flex-wrap">
+                            <!-- Strength Exercise Fields -->
+                            {% if workout_exercise.exercise.exercise_type == 'strength' %}
+                                <div class="ba-w-33 ba-mobile-w-100 ba-mb-2">
+                                    <strong>Sets:</strong> {{ workout_exercise.sets }}
+                                </div>
+                                <div class="ba-w-33 ba-mobile-w-100 ba-mb-2">
+                                    <strong>Reps:</strong> {{ workout_exercise.reps }}
+                                </div>
+                                <div class="ba-w-33 ba-mobile-w-100 ba-mb-2">
+                                    <strong>Weight:</strong> {{ workout_exercise.weight|default:"N/A" }} kg
+                                </div>
+                                <!-- Cardio Exercise Fields -->
+                            {% elif workout_exercise.exercise.exercise_type == 'cardio' %}
+                                <div class="ba-w-50 ba-mobile-w-100 ba-mb-2">
+                                    <strong>Distance:</strong> {{ workout_exercise.distance|default:"N/A" }} km
+                                </div>
+                                <div class="ba-w-50 ba-mobile-w-100 ba-mb-2">
+                                    <strong>Duration:</strong> {{ workout_exercise.duration|default:"N/A" }}
+                                </div>
+                            {% endif %}
+                            <div class="ba-w-100 ba-mb-2">
+                                <strong>Rest Time:</strong> {{ workout_exercise.rest_time|default:"N/A" }}
+                            </div>
+                            {% if workout_exercise.notes %}
+                                <div class="ba-w-100">
+                                    <strong>Notes:</strong> {{ workout_exercise.notes }}
+                                </div>
+                            {% endif %}
+                            <!-- Remove Exercise Button with Confirmation -->
+                            <div class="ba-w-100 ba-mt-2">
+                                <form action="{% url 'workouts:remove_exercise' workout_exercise.id %}"
+                                      method="post"
+                                      onsubmit="return confirm('Are you sure you want to remove this exercise?');">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                            class="ba-btn ba-btn-outline ba-btn-sm ba-remove-exercise">Remove</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No exercises recorded for this workout.</p>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Add Exercise Button -->
+        <button class="ba-btn ba-btn-primary ba-mb-4" id="add-exercise-btn">Add Exercise</button>
+        <!-- Add Exercise Form (Initially Hidden) -->
+        <div id="add-exercise-form" class="ba-card ba-hidden ba-mb-4">
+            <div class="ba-card-header ba-flex ba-justify-between ba-items-center">
+                <h2 class="ba-m-0">Add Exercise</h2>
+            </div>
+            <div class="ba-card-body">
+                <form id="new-exercise-form"
+                      action="{% url 'workouts:add_exercise' %}"
+                      method="post">
+                    {% csrf_token %}
+                    <div class="ba-form-group">
+                        <label for="id_exercise" class="ba-form-label">Exercise</label>
+                        <select name="exercise" id="id_exercise" class="ba-form-input">
+                            {% for exercise in exercises %}
+                                <option value="{{ exercise.id }}">{{ exercise.name }} ({{ exercise.get_exercise_type_display }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="ba-form-group">
+                        <label for="id_sets" class="ba-form-label">Sets</label>
+                        <input type="number"
+                               name="sets"
+                               id="id_sets"
+                               class="ba-form-input"
+                               value="1">
+                    </div>
+                    <div class="ba-form-group">
+                        <label for="id_reps" class="ba-form-label">Reps</label>
+                        <input type="number"
+                               name="reps"
+                               id="id_reps"
+                               class="ba-form-input"
+                               value="1">
+                    </div>
+                    <div class="ba-form-group">
+                        <label for="id_weight" class="ba-form-label">Weight (kg)</label>
+                        <input type="number"
+                               name="weight"
+                               id="id_weight"
+                               class="ba-form-input"
+                               step="0.1"
+                               value="0.0">
+                    </div>
+                    <div class="ba-form-group">
+                        <label for="id_distance" class="ba-form-label">Distance (km)</label>
+                        <input type="number"
+                               name="distance"
+                               id="id_distance"
+                               class="ba-form-input"
+                               step="0.1"
+                               value="0.0">
+                    </div>
+                    <div class="ba-form-group">
+                        <label for="id_duration" class="ba-form-label">Duration</label>
+                        <input type="text"
+                               name="duration"
+                               id="id_duration"
+                               class="ba-form-input"
+                               value="00:00">
+                    </div>
+                    <div class="ba-form-group">
+                        <label for="id_rest_time" class="ba-form-label">Rest Time</label>
+                        <input type="text"
+                               name="rest_time"
+                               id="id_rest_time"
+                               class="ba-form-input"
+                               value="00:00">
+                    </div>
+                    <div class="ba-form-group">
+                        <label for="id_notes" class="ba-form-label">Notes</label>
+                        <textarea name="notes" id="id_notes" class="ba-form-input" rows="2"></textarea>
+                    </div>
+                    <button type="submit" class="ba-btn ba-btn-primary">Add Exercise</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleButton = document.querySelector('.ba-toggle-exercises');
+        const exerciseList = document.querySelector('.ba-exercise-list');
+        const addExerciseBtn = document.getElementById('add-exercise-btn');
+        const addExerciseForm = document.getElementById('add-exercise-form');
+
+        toggleButton.addEventListener('click', function() {
+            exerciseList.classList.toggle('ba-hidden');
+            toggleButton.textContent = exerciseList.classList.contains('ba-hidden') ? 'Show Exercises' : 'Hide Exercises';
+        });
+
+        addExerciseBtn.addEventListener('click', function() {
+            addExerciseForm.classList.toggle('ba-hidden');
+            addExerciseBtn.textContent = addExerciseForm.classList.contains('ba-hidden') ? 'Add Exercise' : 'Cancel';
+        });
+    });
+    </script>
+</div>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'workouts_app/workouts_app.css' %}">
+{% endblock %}

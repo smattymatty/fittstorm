@@ -1,0 +1,51 @@
+<div id="meal-list"></div>
+<div class="ba-card ba-shadow-hover ba-border-gradient">
+    <h2 class="ba-card-header ba-border-bottom-accent">Your Meals</h2>
+    <ul class="ba-list-unstyled">
+        {% for meal in meals %}
+            <li class="ba-list-item ba-border-bottom ba-px-3 ba-py-4 ba-border-dashed-hover ba-hover-scale ba-meal-type-{{ meal.meal_type }}">
+                <div class="ba-flex ba-justify-between ba-items-center">
+                    <span class="ba-flex-grow ba-flex ba-items-center">
+                        <span class="ba-meal-type-icon">
+                            {% if meal.meal_type == 'breakfast' %}
+                                🍳
+                            {% elif meal.meal_type == 'lunch' %}
+                                🥪
+                            {% elif meal.meal_type == 'dinner' %}
+                                🍽️
+                            {% else %}
+                                🍎
+                            {% endif %}
+                        </span>
+                        <strong class="ba-text-accent">{{ meal.name }}</strong>
+                        <span class="ba-pill ba-bg-accent ba-text-white ba-ml-2">{{ meal.get_meal_type_display }}</span>
+                        <span class="ba-calorie-badge ba-ml-2">{{ meal.estimated_calories }} cal</span>
+                    </span>
+                    <span class="ba-meal-date">{{ meal.date|date:"M d, Y H:i" }}</span>
+                </div>
+                <ul class="ba-list-unstyled ba-mt-2 ba-ingredient-list">
+                    {% for meal_ingredient in meal.meal_ingredients.all %}
+                        <li class="ba-flex ba-justify-between ba-items-center ba-py-1">
+                            <span>{{ meal_ingredient.amount }} {{ meal_ingredient.get_unit_display }} of {{ meal_ingredient.ingredient.name }}</span>
+                            <span>{{ meal_ingredient.ingredient.calories_per_100g }} cal/100g</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% if meal.recipe %}
+                    <div class="ba-mt-2">
+                        <strong>Recipe:</strong>
+                        <p class="ba-text-muted">{{ meal.recipe|truncatewords:20 }}</p>
+                    </div>
+                {% endif %}
+                <div class="ba-flex ba-justify-between ba-mt-3">
+                    <span class="ba-text-muted">Other nutrients: {{ meal.other_nutrients|truncatewords:5 }}</span>
+                    <a href="{% url 'nutrition:meal_detail' meal.pk %}"
+                       class="ba-btn ba-btn-outline ba-btn-sm">View Details</a>
+                </div>
+            </li>
+        {% empty %}
+            <li class="ba-text-center ba-py-4 ba-text-muted">No meals yet. Start by creating a new meal!</li>
+        {% endfor %}
+    </ul>
+</div>
+</div>

@@ -1,0 +1,153 @@
+/* Workout Type Icon */
+.ba-workout-type-icon {
+  font-size: 1.2em;
+  margin-right: 0.5rem;
+}
+
+/* Calorie Badge */
+.ba-calorie-badge {
+  background-color: #ffc107;
+  color: #000;
+  padding: 0.2em 0.6em;
+  border-radius: 1rem;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+/* Exercise List */
+.ba-exercise-list {
+  font-size: 0.9em;
+  color: #6c757d;
+}
+
+/* Exercise Details */
+.ba-exercise-details {
+  font-size: 0.9em;
+  color: #495057;
+  font-weight: 500;
+}
+
+/* Workout Date */
+.ba-workout-date {
+  font-size: 0.8em;
+  color: #6c757d;
+}
+
+/* Workout Type Background Colors */
+.ba-workout-type-strength {
+  background-color: #e6f3ff;
+}
+.ba-workout-type-cardio {
+  background-color: #fff4e6;
+}
+.ba-workout-type-yoga {
+  background-color: #f3e6ff;
+}
+.ba-workout-type-other {
+  background-color: #e6fff4;
+}
+
+/* Hover Effect */
+.ba-hover-scale:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* Button Styles */
+.ba-btn-outline {
+  border: 1px solid #007bff;
+  color: #007bff;
+  background-color: transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: all 0.15s ease-in-out;
+}
+
+.ba-btn-outline:hover {
+  color: #fff;
+  background-color: #007bff;
+}
+
+/* Additional styles to ensure consistency */
+
+.ba-border-bottom-accent {
+  border-bottom: 2px solid #007bff;
+}
+
+.ba-text-accent {
+  color: #007bff;
+}
+
+.ba-pill {
+  padding: 0.25em 0.6em;
+  border-radius: 10rem;
+  font-size: 0.75em;
+}
+
+.ba-bg-accent {
+  background-color: #007bff;
+}
+
+.ba-text-white {
+  color: #fff;
+}
+
+.ba-text-muted {
+  color: #6c757d;
+}
+
+.ba-workout-type-icon {
+  font-size: 1.2em;
+  margin-right: 0.5rem;
+}
+
+.ba-exercise-list {
+  font-size: 0.9em;
+  color: #6c757d;
+}
+
+.ba-exercise-details {
+  font-size: 0.9em;
+  color: #495057;
+  font-weight: 500;
+}
+
+.ba-workout-date {
+  font-size: 0.8em;
+  color: #6c757d;
+}
+
+.ba-workout-type-strength {
+  background-color: #e6f3ff;
+}
+
+.ba-workout-type-cardio {
+  background-color: #fff4e6;
+}
+
+.ba-workout-type-yoga {
+  background-color: #f3e6ff;
+}
+
+.ba-workout-type- {
+  background-color: #202f280d;
+}
+
+.ba-toggle-exercises {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.ba-toggle-exercises:hover {
+  background-color: var(--ba-accent-color);
+  color: #fff;
+}
+
+.ba-exercise-item {
+  transition: background-color 0.3s ease;
+}
+
+.ba-exercise-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}

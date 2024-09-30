@@ -1,0 +1,31 @@
+{% extends 'BaseApp/pages/generic_page.html' %}
+{% load static %}
+{% block page_content %}
+    <div id="nutrition-page" class="ba-my-5">
+        <h1 class="ba-text-center ba-border-bottom-accent ba-pb-3 ba-mb-5">{{ page_title }}</h1>
+        <p class="ba-text-center ba-mb-5">{{ page_description }}</p>
+        <div class="ba-flex ba-flex-row ba-justify-between">
+            <div class="ba-w-50 ba-py-4 ba-border-right"
+                 hx-get="{% url 'nutrition:meal_list' %}"
+                 hx-trigger="load"
+                 hx-target="#meal-list"
+                 hx-swap="outerHTML">
+                <!-- This is where the ingredient list will be loaded -->
+                <div id="meal-list" class="loading-container"></div>
+            </div>
+            <div class="ba-w-50 ba-pl-4 ba-pb-4"
+                 hx-get="{% url 'nutrition:add_meal' %}"
+                 hx-trigger="load"
+                 hx-target="#meal-create-form"
+                 hx-swap="outerHTML">
+                <!-- This is where the meal creation form will be loaded -->
+                <div id="meal-create-form"></div>
+            </div>
+        </div>
+        <div class="ba-mt-5 ba-pt-4 ba-border-top ba-text-center">{{ nutrition_settings }}</div>
+    </div>
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{% static 'nutrition_app/nutrition_app.css' %}" />
+{% endblock %}

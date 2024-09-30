@@ -1,0 +1,379 @@
+2024-09-04T18:35:36.631533+0000DEBUG
+add_workout71WorkoutForm: <div>
+    <label for="id_name">Name:</label>
+
+
+
+<input type="text" name="name" value="ww" class="ba-form-input" maxlength="100" required id="id_name">
+    
+</div>
+
+  <div>
+    <label for="id_duration">Duration:</label>
+
+<div class="helptext" id="id_duration_helptext">Duration of workout</div>
+
+<input type="text" name="duration" value="00:00" class="ba-form-input" required aria-describedby="id_duration_helptext" id="id_duration">
+    
+</div>
+
+  <div>
+    <label for="id_estimated_calories">Estimated calories:</label>
+
+<div class="helptext" id="id_estimated_calories_helptext">Estimated calories burned (0 for unknown)</div>
+
+<input type="number" name="estimated_calories" value="0" class="ba-form-input" required aria-describedby="id_estimated_calories_helptext" id="id_estimated_calories">
+    
+</div>
+
+  <div>
+    <label for="id_notes">Notes:</label>
+
+
+
+<textarea name="notes" cols="40" rows="3" class="ba-form-input" id="id_notes">
+</textarea>
+    
+      
+    
+</div>
+2024-09-04T18:35:36.640861+0000DEBUG
+add_workout72WorkoutExerciseFormSet: <input type="hidden" name="workout_exercises-TOTAL_FORMS" value="1" id="id_workout_exercises-TOTAL_FORMS"><input type="hidden" name="workout_exercises-INITIAL_FORMS" value="0" id="id_workout_exercises-INITIAL_FORMS"><input type="hidden" name="workout_exercises-MIN_NUM_FORMS" value="0" id="id_workout_exercises-MIN_NUM_FORMS"><input type="hidden" name="workout_exercises-MAX_NUM_FORMS" value="1000" id="id_workout_exercises-MAX_NUM_FORMS"><div>
+    <label for="id_workout_exercises-0-exercise">Exercise:</label>
+
+
+
+<select name="workout_exercises-0-exercise" class="ba-form-input" id="id_workout_exercises-0-exercise">
+  <option value="">---------</option>
+
+  <option value="1" selected>poo (Strength)</option>
+
+  <option value="2">pee (Strength)</option>
+
+</select>
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-sets">Sets:</label>
+
+
+
+<input type="number" name="workout_exercises-0-sets" value="1" class="ba-form-input" id="id_workout_exercises-0-sets">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-reps">Reps:</label>
+
+
+
+<input type="number" name="workout_exercises-0-reps" value="1" class="ba-form-input" id="id_workout_exercises-0-reps">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-weight">Weight:</label>
+
+
+
+<input type="number" name="workout_exercises-0-weight" value="0.0" class="ba-form-input" step="0.1" id="id_workout_exercises-0-weight">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-distance">Distance:</label>
+
+
+
+<input type="number" name="workout_exercises-0-distance" value="0.0" class="ba-form-input" step="0.1" id="id_workout_exercises-0-distance">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-duration">Duration:</label>
+
+
+
+<input type="text" name="workout_exercises-0-duration" value="00:00" class="ba-form-input" id="id_workout_exercises-0-duration">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-rest_time">Rest time:</label>
+
+
+
+<input type="text" name="workout_exercises-0-rest_time" value="00:00" class="ba-form-input" id="id_workout_exercises-0-rest_time">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-notes">Notes:</label>
+
+
+
+<textarea name="workout_exercises-0-notes" cols="40" rows="2" class="ba-form-input" id="id_workout_exercises-0-notes">
+</textarea>
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-DELETE">Delete:</label>
+
+
+
+<input type="checkbox" name="workout_exercises-0-DELETE" id="id_workout_exercises-0-DELETE">
+    
+      <input type="hidden" name="workout_exercises-0-workout" id="id_workout_exercises-0-workout"><input type="hidden" name="workout_exercises-0-id" id="id_workout_exercises-0-id">
+    
+</div>
+2024-09-04T18:38:49.785896+0000DEBUG
+add_workout71WorkoutForm: <div>
+    <label for="id_name">Name:</label>
+
+
+
+<input type="text" name="name" value="teeeeee" class="ba-form-input" maxlength="100" required id="id_name">
+    
+</div>
+
+  <div>
+    <label for="id_duration">Duration:</label>
+
+<div class="helptext" id="id_duration_helptext">Duration of workout</div>
+
+<input type="text" name="duration" value="00:00" class="ba-form-input" required aria-describedby="id_duration_helptext" id="id_duration">
+    
+</div>
+
+  <div>
+    <label for="id_estimated_calories">Estimated calories:</label>
+
+<div class="helptext" id="id_estimated_calories_helptext">Estimated calories burned (0 for unknown)</div>
+
+<input type="number" name="estimated_calories" value="0" class="ba-form-input" required aria-describedby="id_estimated_calories_helptext" id="id_estimated_calories">
+    
+</div>
+
+  <div>
+    <label for="id_notes">Notes:</label>
+
+
+
+<textarea name="notes" cols="40" rows="3" class="ba-form-input" id="id_notes">
+</textarea>
+    
+      
+    
+</div>
+2024-09-04T18:38:49.812240+0000DEBUG
+add_workout72WorkoutExerciseFormSet: <input type="hidden" name="workout_exercises-TOTAL_FORMS" value="2" id="id_workout_exercises-TOTAL_FORMS"><input type="hidden" name="workout_exercises-INITIAL_FORMS" value="0" id="id_workout_exercises-INITIAL_FORMS"><input type="hidden" name="workout_exercises-MIN_NUM_FORMS" value="0" id="id_workout_exercises-MIN_NUM_FORMS"><input type="hidden" name="workout_exercises-MAX_NUM_FORMS" value="1000" id="id_workout_exercises-MAX_NUM_FORMS"><div>
+    <label for="id_workout_exercises-0-exercise">Exercise:</label>
+
+
+
+<select name="workout_exercises-0-exercise" class="ba-form-input" id="id_workout_exercises-0-exercise">
+  <option value="">---------</option>
+
+  <option value="1">poo (Strength)</option>
+
+  <option value="2" selected>pee (Strength)</option>
+
+</select>
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-sets">Sets:</label>
+
+
+
+<input type="number" name="workout_exercises-0-sets" value="1" class="ba-form-input" id="id_workout_exercises-0-sets">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-reps">Reps:</label>
+
+
+
+<input type="number" name="workout_exercises-0-reps" value="1" class="ba-form-input" id="id_workout_exercises-0-reps">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-weight">Weight:</label>
+
+
+
+<input type="number" name="workout_exercises-0-weight" value="0.0" class="ba-form-input" step="0.1" id="id_workout_exercises-0-weight">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-distance">Distance:</label>
+
+
+
+<input type="number" name="workout_exercises-0-distance" value="0.0" class="ba-form-input" step="0.1" id="id_workout_exercises-0-distance">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-duration">Duration:</label>
+
+
+
+<input type="text" name="workout_exercises-0-duration" value="00:00" class="ba-form-input" id="id_workout_exercises-0-duration">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-rest_time">Rest time:</label>
+
+
+
+<input type="text" name="workout_exercises-0-rest_time" value="00:00" class="ba-form-input" id="id_workout_exercises-0-rest_time">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-notes">Notes:</label>
+
+
+
+<textarea name="workout_exercises-0-notes" cols="40" rows="2" class="ba-form-input" id="id_workout_exercises-0-notes">
+</textarea>
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-0-DELETE">Delete:</label>
+
+
+
+<input type="checkbox" name="workout_exercises-0-DELETE" id="id_workout_exercises-0-DELETE">
+    
+      <input type="hidden" name="workout_exercises-0-workout" id="id_workout_exercises-0-workout"><input type="hidden" name="workout_exercises-0-id" id="id_workout_exercises-0-id">
+    
+</div><div>
+    <label for="id_workout_exercises-1-exercise">Exercise:</label>
+
+
+
+<select name="workout_exercises-1-exercise" class="ba-form-input" id="id_workout_exercises-1-exercise">
+  <option value="">---------</option>
+
+  <option value="1" selected>poo (Strength)</option>
+
+  <option value="2">pee (Strength)</option>
+
+</select>
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-1-sets">Sets:</label>
+
+
+
+<input type="number" name="workout_exercises-1-sets" value="1" class="ba-form-input" id="id_workout_exercises-1-sets">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-1-reps">Reps:</label>
+
+
+
+<input type="number" name="workout_exercises-1-reps" value="1" class="ba-form-input" id="id_workout_exercises-1-reps">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-1-weight">Weight:</label>
+
+
+
+<input type="number" name="workout_exercises-1-weight" value="0.0" class="ba-form-input" step="0.1" id="id_workout_exercises-1-weight">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-1-distance">Distance:</label>
+
+
+
+<input type="number" name="workout_exercises-1-distance" value="0.0" class="ba-form-input" step="0.1" id="id_workout_exercises-1-distance">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-1-duration">Duration:</label>
+
+
+
+<input type="text" name="workout_exercises-1-duration" value="00:00" class="ba-form-input" id="id_workout_exercises-1-duration">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-1-rest_time">Rest time:</label>
+
+
+
+<input type="text" name="workout_exercises-1-rest_time" value="00:00" class="ba-form-input" id="id_workout_exercises-1-rest_time">
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-1-notes">Notes:</label>
+
+
+
+<textarea name="workout_exercises-1-notes" cols="40" rows="2" class="ba-form-input" id="id_workout_exercises-1-notes">
+</textarea>
+    
+</div>
+
+  <div>
+    <label for="id_workout_exercises-1-DELETE">Delete:</label>
+
+
+
+<input type="checkbox" name="workout_exercises-1-DELETE" id="id_workout_exercises-1-DELETE">
+    
+      <input type="hidden" name="workout_exercises-1-workout" id="id_workout_exercises-1-workout"><input type="hidden" name="workout_exercises-1-id" id="id_workout_exercises-1-id">
+    
+</div>
+2024-09-04T19:28:50.208879+0000DEBUG
+add_workout71[{'exercise': ['This field is required.']}]
+2024-09-04T19:28:59.207636+0000DEBUG
+add_workout71[{}]
+2024-09-04T19:29:20.356800+0000DEBUG
+add_workout71[{}]
+2024-09-04T19:30:00.007870+0000DEBUG
+add_workout71[{'exercise': ['This field is required.']}]
+2024-09-04T19:31:53.608058+0000DEBUG
+add_workout86add_workout
+2024-09-04T19:34:11.787316+0000DEBUG
+add_workout88add_workout errors:  [{'exercise': ['This field is required.']}]
+2024-09-04T19:34:33.684259+0000DEBUG
+add_workout88add_workout errors:  [{'exercise': ['This field is required.']}, {'exercise': ['This field is required.']}]
+2024-09-04T20:11:15.740921+0000DEBUG
+add_workout88add_workout errors:  [{'exercise': ['This field is required.']}]
+2024-09-04T20:11:17.635912+0000DEBUG
+add_workout88add_workout errors:  [{'exercise': ['This field is required.']}]
+2024-09-04T20:11:27.102971+0000DEBUG
+add_workout88add_workout errors:  [{'exercise': ['This field is required.']}]
+2024-09-04T20:41:37.530012+0000DEBUG
+add_workout88add_workout errors:  [{'exercise': ['This field is required.']}, {'exercise': ['This field is required.']}]
+2024-09-04T20:41:38.463016+0000DEBUG
+add_workout88add_workout errors:  [{'exercise': ['This field is required.']}, {'exercise': ['This field is required.']}]
+2024-09-04T20:41:40.229488+0000DEBUG
+add_workout88add_workout errors:  [{'exercise': ['This field is required.']}, {'exercise': ['This field is required.']}]
+2024-09-04T20:41:46.295972+0000DEBUG
+add_workout88add_workout errors:  [{'exercise': ['This field is required.']}]
+2024-09-06T03:33:38.674749+0000DEBUG
+add_workout88add_workout errors:  [{'exercise': ['This field is required.']}, {'exercise': ['This field is required.']}, {'exercise': ['This field is required.']}, {'exercise': ['This field is required.']}]

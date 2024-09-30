@@ -1,0 +1,13 @@
+{% load widget_tweaks %}
+<div class="ba-exercise-form ba-mb-3">
+    {% for field in strength_form %}
+        <div class="ba-form-group">
+            <label for="{{ field.id_for_label }}" class="ba-form-label">{{ field.label }}</label>
+            {{ field|add_class:"ba-form-input" }}
+            {% if field.errors %}<div class="ba-form-error">{{ field.errors }}</div>{% endif %}
+        </div>
+    {% endfor %}
+    <button type="button"
+            class="ba-btn ba-btn-outline ba-btn-sm ba-remove-exercise"
+            data-exercise-type="strength">Remove</button>
+</div>

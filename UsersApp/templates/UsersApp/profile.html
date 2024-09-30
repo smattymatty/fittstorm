@@ -1,0 +1,49 @@
+{% extends 'BaseApp/base.html' %}
+{% block content %}
+    <div class="ba-sub-container ba-w-100 ba-my-5">
+        <h2 class="ba-text-center ba-mb-4">Account Information</h2>
+        <div class="ba-flex-grid ba-flex-grid-2">
+            <div class="ba-card">
+                <div class="ba-card-header">Personal Info</div>
+                <div class="ba-card-body">
+                    <div class="ba-flex ba-justify-between ba-items-center ba-mb-2">
+                        <span class="ba-text-muted">Username:</span>
+                        <span class="ba-font-bold">{{ user.username }}</span>
+                    </div>
+                    <div class="ba-flex ba-justify-between ba-items-center">
+                        <span class="ba-text-muted">Email:</span>
+                        <span class="ba-font-bold">{{ user.email }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ba-card">
+                <div class="ba-card-header">
+                    <span>Physical Info</span>
+                    <button class="ba-btn-icon" aria-label="Edit physical info">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="16"
+                             height="16"
+                             fill="currentColor"
+                             viewBox="0 0 16 16">
+                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="ba-card-body">
+                    <div class="ba-flex ba-justify-between ba-items-center ba-mb-2">
+                        <span class="ba-text-muted">Height:</span>
+                        <span class="ba-font-bold">{{ user.profile.height }} cm</span>
+                    </div>
+                    <div class="ba-flex ba-justify-between ba-items-center">
+                        <span class="ba-text-muted">Weight:</span>
+                        <span class="ba-font-bold">{{ user.profile.weight }} kg</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ba-flex ba-justify-center ba-mt-4">
+            <a href="{% url 'UsersApp:logout' %}"
+               class="ba-w-100 ba-btn ba-btn-outline">Log Out</a>
+        </div>
+    </div>
+{% endblock %}

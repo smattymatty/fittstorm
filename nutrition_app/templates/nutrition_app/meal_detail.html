@@ -1,0 +1,17 @@
+<div class="ba-card ba-shadow-hover ba-border-gradient">
+    <h2 class="ba-card-header ba-border-bottom-accent">{{ meal.name }}</h2>
+    <ul class="ba-list-unstyled">
+        {% for meal_ingredient in meal.meal_ingredients.all %}
+            <li class="ba-list-item ba-border-bottom ba-px-2 ba-py-3 ba-border-dashed-hover">
+                <span class="ba-text-muted ba-ml-2">{{ meal_ingredient.amount }} {{ meal_ingredient.get_unit_display }} of {{ meal_ingredient.ingredient.name }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="ba-mt-2">
+        <strong>Recipe:</strong>
+        <p class="ba-text-muted">{{ meal.recipe|truncatewords:20 }}</p>
+    </div>
+    <div class="ba-flex ba-justify-between ba-mt-3">
+        <span class="ba-text-muted">Other nutrients: {{ meal.other_nutrients|truncatewords:5 }}</span>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<!-- templates/workouts_app/add_exercise.html -->
+{% load widget_tweaks %}
+<div id="exercise-create-form">
+    <div class="ba-card ba-shadow-hover ba-border-gradient ba-p-4">
+        <div class="ba-w-100 ba-flex ba-justify-between ba-items-center">
+            <h2 class="ba-card-header ba-w-100 ba-pb-2 ba-border-bottom-accent ba-mb-4">Add New Exercise</h2>
+            {% if request.htmx %}
+                <a href="{% url 'workouts:add_exercise' %}"
+                   onclick="return confirm('Leave this page?')"
+                   class="ba-btn ba-opacity-50 ba-component-title ba-text-center ba-px-3 ba-py-2">
+                    {% include 'BaseApp/svg/expand.html' %}
+                </a>
+            {% endif %}
+        </div>
+        <form hx-post="{% url 'workouts:add_exercise' %}"
+              hx-target="#exercise-create-form"
+              hx-swap="outerHTML"
+              method="post"
+              class="ba-flex ba-flex-col">
+            {% csrf_token %}
+            <div class="ba-form-group">
+                <label for="{{ exercise_form.name.id_for_label }}" class="ba-form-label">{{ exercise_form.name.label }}</label>
+                {{ exercise_form.name|add_class:"ba-form-input" }}
+            </div>
+            <div class="ba-form-group">
+                <label for="{{ exercise_form.exercise_type.id_for_label }}"
+                       class="ba-form-label">{{ exercise_form.exercise_type.label }}</label>
+                {{ exercise_form.exercise_type|add_class:"ba-form-input" }}
+            </div>
+            <div class="ba-form-group">
+                <label for="{{ exercise_form.focus.id_for_label }}" class="ba-form-label">{{ exercise_form.focus.label }}</label>
+                {{ exercise_form.focus|add_class:"ba-form-input" }}
+            </div>
+            <div class="ba-form-group">
+                <label for="{{ exercise_form.description.id_for_label }}"
+                       class="ba-form-label">{{ exercise_form.description.label }}</label>
+                {{ exercise_form.description|add_class:"ba-form-input" }}
+            </div>
+            <div class="ba-form-group">
+                <label for="{{ exercise_form.estimated_calories_per_rep.id_for_label }}"
+                       class="ba-form-label">{{ exercise_form.estimated_calories_per_rep.label }}</label>
+                {{ exercise_form.estimated_calories_per_rep|add_class:"ba-form-input" }}
+            </div>
+            <button type="submit" class="ba-btn ba-btn-primary">Add Exercise</button>
+        </form>
+    </div>
+</div>

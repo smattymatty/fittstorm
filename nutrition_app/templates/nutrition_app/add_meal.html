@@ -1,0 +1,106 @@
+{% load widget_tweaks %}
+<div id="meal-create-form">
+    <div class="ba-card ba-shadow-hover ba-border-gradient ba-p-4">
+        <h2 class="ba-card-header ba-border-bottom-accent ba-pb-3 ba-mb-4">Add New Meal</h2>
+        <form hx-post="{% url 'nutrition:add_meal' %}"
+              hx-target="#meal-create-form"
+              hx-swap="outerHTML"
+              method="post"
+              class="ba-flex ba-flex-col">
+            {% csrf_token %}
+            <div class="ba-flex ba-flex-wrap ba-justify-between">
+                <div class="ba-form-group ba-w-50 ba-pr-2">
+                    <label for="{{ meal_form.name.id_for_label }}" class="ba-form-label">{{ meal_form.name.label }}</label>
+                    {{ meal_form.name|add_class:"ba-form-input" }}
+                </div>
+                <div class="ba-form-group ba-w-50 ba-pl-2">
+                    <label for="{{ meal_form.meal_type.id_for_label }}" class="ba-form-label">{{ meal_form.meal_type.label }}</label>
+                    {{ meal_form.meal_type|add_class:"ba-form-input" }}
+                </div>
+            </div>
+            <div class="ba-form-group">
+                <label for="{{ meal_form.estimated_calories.id_for_label }}"
+                       class="ba-form-label">{{ meal_form.estimated_calories.label }}</label>
+                {{ meal_form.estimated_calories|add_class:"ba-form-input" }}
+            </div>
+            <div class="ba-form-group">
+                <label for="{{ meal_form.recipe.id_for_label }}" class="ba-form-label">{{ meal_form.recipe.label }}</label>
+                {{ meal_form.recipe|add_class:"ba-form-input" }}
+            </div>
+            <h3 class="ba-border-bottom ba-pb-2 ba-mb-3">Ingredients</h3>
+            {{ ingredient_formset.management_form }}
+            <div id="ingredient-formset" class="ba-mb-4">
+                {% for form in ingredient_formset %}
+                    <div class="ba-flex ba-flex-wrap ba-justify-between ba-mb-3 ba-ingredient-form">
+                        <div class="ba-form-group ba-w-25 ba-pr-2">
+                            <label for="{{ form.ingredient.id_for_label }}" class="ba-form-label">Ingredient</label>
+                            {{ form.ingredient|add_class:"ba-form-input" }}
+                        </div>
+                        <div class="ba-form-group ba-w-25 ba-px-2">
+                            <label for="{{ form.amount.id_for_label }}" class="ba-form-label">Amount</label>
+                            {{ form.amount|add_class:"ba-form-input" }}
+                        </div>
+                        <div class="ba-form-group ba-w-25 ba-px-2">
+                            <label for="{{ form.unit.id_for_label }}" class="ba-form-label">Unit</label>
+                            {{ form.unit|add_class:"ba-form-input" }}
+                        </div>
+                        <div class="ba-form-group ba-w-25 ba-pl-2 ba-flex ba-items-end">
+                            <button type="button"
+                                    class="ba-btn ba-btn-outline ba-btn-sm ba-remove-ingredient">Remove</button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- Hidden template for new ingredients -->
+            <div id="empty-form" class="ba-hidden">
+                <div class="ba-flex ba-flex-wrap ba-justify-between ba-mb-3 ba-ingredient-form">
+                    <div class="ba-form-group ba-w-25 ba-pr-2">
+                        <label for="{{ ingredient_formset.empty_form.ingredient.id_for_label }}"
+                               class="ba-form-label">Ingredient</label>
+                        {{ ingredient_formset.empty_form.ingredient|add_class:"ba-form-input" }}
+                    </div>
+                    <div class="ba-form-group ba-w-25 ba-px-2">
+                        <label for="{{ ingredient_formset.empty_form.amount.id_for_label }}"
+                               class="ba-form-label">Amount</label>
+                        {{ ingredient_formset.empty_form.amount|add_class:"ba-form-input" }}
+                    </div>
+                    <div class="ba-form-group ba-w-25 ba-px-2">
+                        <label for="{{ ingredient_formset.empty_form.unit.id_for_label }}"
+                               class="ba-form-label">Unit</label>
+                        {{ ingredient_formset.empty_form.unit|add_class:"ba-form-input" }}
+                    </div>
+                    <div class="ba-form-group ba-w-25 ba-pl-2 ba-flex ba-items-end">
+                        <button type="button"
+                                class="ba-btn ba-btn-outline ba-btn-sm ba-remove-ingredient">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <button type="button"
+                    id="add-ingredient"
+                    class="ba-btn ba-btn-outline ba-mb-4">Add Ingredient</button>
+            <button type="submit" class="ba-btn ba-btn-primary">Add Meal</button>
+        </form>
+    </div>
+</div>
+<script>
+    const ingredientFormset = document.getElementById('ingredient-formset');
+    const addIngredientBtn = document.getElementById('add-ingredient');
+    const emptyForm = document.getElementById('empty-form').firstElementChild;
+    let formCount = {{ ingredient_formset.total_form_count }};
+
+    addIngredientBtn.addEventListener('click', function() {
+        const newForm = emptyForm.cloneNode(true);
+        newForm.innerHTML = newForm.innerHTML.replace(/__prefix__/g, formCount);
+        ingredientFormset.appendChild(newForm);
+        formCount++;
+        document.getElementById('id_form-TOTAL_FORMS').value = formCount;
+    });
+
+    ingredientFormset.addEventListener('click', function(e) {
+        if (e.target.classList.contains('ba-remove-ingredient')) {
+            e.target.closest('.ba-ingredient-form').remove();
+            formCount--;
+            document.getElementById('id_form-TOTAL_FORMS').value = formCount;
+        }
+    });
+</script>

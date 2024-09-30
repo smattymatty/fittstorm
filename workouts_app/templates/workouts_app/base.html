@@ -1,0 +1,44 @@
+{% extends 'BaseApp/pages/generic_page.html' %}
+{% load static %}
+{% block page_content %}
+    <div class="">
+        <div id="workouts-page" class="">
+            <h1 class="ba-text-center ba-border-bottom-accent ba-pb-3 ba-mb-5">{{ page_title }}</h1>
+            <p class="ba-text-center ba-mb-5">{{ page_description }}</p>
+            <div id="workout-main-detail" class="ba-w-100"></div>
+            <div class="ba-flex ba-flex-row ba-justify-between">
+                <div class="ba-w-33 ba-mobile-w-100 ba-pb-4 ba-min-h-100"
+                     hx-get="{% url 'workouts:user_list' %}"
+                     hx-trigger="load"
+                     hx-target="#workout-list"
+                     hx-swap="outerHTML">
+                    <div id="workout-list" class="loading-container"></div>
+                </div>
+                <div class="ba-w-66 ba-mobile-w-100 ba-pl-4 ba-pb-4 ba-min-h-100"
+                     hx-get="{% url 'workouts:add_workout' %}"
+                     hx-trigger="load"
+                     hx-target="#workout-create-form"
+                     hx-swap="outerHTML">
+                    <div id="workout-create-form" class="loading-container"></div>
+                </div>
+            </div>
+            <div class="ba-flex ba-flex-row ba-justify-between">
+                <div class="ba-w-33 ba-mobile-w-100 ba-pb-4"
+                     hx-get="{% url 'workouts:exercise_user_list' %}"
+                     hx-trigger="load"
+                     hx-target="#exercise-list"
+                     hx-swap="outerHTML">
+                    <div id="exercise-list" class="loading-container"></div>
+                </div>
+                <div class="ba-w-66 ba-mobile-w-100 ba-pl-4 ba-pb-4 ba-min-h-100"
+                     hx-get="{% url 'workouts:add_exercise' %}"
+                     hx-trigger="load"
+                     hx-target="#exercise-create-form"
+                     hx-swap="outerHTML">
+                    <div id="exercise-create-form" class="loading-container"></div>
+                </div>
+            </div>
+            <div class="ba-mt-5 ba-pt-4 ba-border-top ba-text-center">{{ workouts_settings }}</div>
+        </div>
+    </div>
+{% endblock %}

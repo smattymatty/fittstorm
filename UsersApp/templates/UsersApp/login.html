@@ -1,0 +1,19 @@
+{% extends 'BaseApp/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    <h2 class="ba-text-center ba-mb-4">Log In</h2>
+    <form method="post" class="ba-container ba-mb-4">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="ba-form-group">
+                <label class="ba-form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field|add_class:"ba-form-input" }}
+                {% if field.errors %}<div class="ba-form-error">{{ field.errors }}</div>{% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="ba-btn ba-btn-primary ba-w-100">Log In</button>
+    </form>
+    <h3 class="ba-text-center">
+        Don't have an account? <a href="{% url 'UsersApp:signup' %}" class="ba-link">Sign Up</a>
+    </h3>
+{% endblock %}

@@ -1,0 +1,5 @@
+{% extends 'BaseApp/base.html' %}
+{% block content %}
+    <div>{% include "UsersApp/login.html" with included="true" %}</div>
+    <div>{% include "UsersApp/signup.html" with included="true" %}</div>
+{% endblock %}

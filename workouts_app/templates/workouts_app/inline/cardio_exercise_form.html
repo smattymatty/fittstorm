@@ -1,0 +1,17 @@
+{% load widget_tweaks %}
+<div class="ba-exercise-form ba-mb-3">
+    <div class="ba-flex ba-flex-wrap ba-justify-between">
+        <div class="ba-form-group ba-w-50 ba-pr-2">
+            <label for="{{ form.distance.id_for_label }}" class="ba-form-label">{{ form.distance.label }}</label>
+            {{ form.distance|add_class:"ba-form-input" }}hi
+        </div>
+        <div class="ba-form-group ba-w-50 ba-pl-2">
+            <label for="{{ form.average_heart_rate.id_for_label }}"
+                   class="ba-form-label">{{ form.average_heart_rate.label }}</label>
+            {{ form.average_heart_rate|add_class:"ba-form-input" }}
+        </div>
+    </div>
+    <button type="button"
+            class="ba-btn ba-btn-outline ba-btn-sm ba-remove-exercise"
+            data-exercise-type="cardio">Remove</button>
+</div>

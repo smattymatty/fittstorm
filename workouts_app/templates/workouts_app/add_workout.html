@@ -1,0 +1,172 @@
+{% load widget_tweaks %}
+<!-- TODO: separate into separate templates -->
+<div id="workout-create-form">
+    <div class="ba-card ba-shadow-hover ba-border-gradient ba-p-4">
+        <div class="ba-w-100 ba-flex ba-justify-between ba-items-center">
+            <h2 class="ba-card-header ba-w-100 ba-pb-2 ba-border-bottom-accent ba-mb-4">Add New Workout</h2>
+            {% if request.htmx %}
+                <a href="{% url 'workouts:add_workout' %}"
+                   onclick="return confirm('Leave this page?')"
+                   class="ba-btn ba-opacity-50 ba-component-title ba-text-center ba-px-3 ba-py-2">
+                    {% include 'BaseApp/svg/expand.html' %}
+                </a>
+            {% endif %}
+        </div>
+        <form hx-post="{% url 'workouts:add_workout' %}"
+              hx-target="#workout-create-form"
+              hx-swap="outerHTML"
+              method="post"
+              class="ba-flex ba-flex-col">
+            {% csrf_token %}
+            <div class="ba-flex ba-flex-wrap ba-justify-between">
+                <div class="ba-form-group ba-w-50 ba-pr-2">
+                    <label for="{{ workout_form.name.id_for_label }}" class="ba-form-label">{{ workout_form.name.label }}</label>
+                    {{ workout_form.name|add_class:"ba-form-input" }}
+                </div>
+                <div class="ba-form-group ba-w-50 ba-pl-2">
+                    <label for="{{ workout_form.duration.id_for_label }}" class="ba-form-label">{{ workout_form.duration.label }}</label>
+                    {{ workout_form.duration|add_class:"ba-form-input" }}
+                </div>
+            </div>
+            <div class="ba-form-group">
+                <label for="{{ workout_form.estimated_calories.id_for_label }}"
+                       class="ba-form-label">{{ workout_form.estimated_calories.label }}</label>
+                {{ workout_form.estimated_calories|add_class:"ba-form-input" }}
+            </div>
+            <div class="ba-form-group">
+                <label for="{{ workout_form.notes.id_for_label }}" class="ba-form-label">{{ workout_form.notes.label }}</label>
+                {{ workout_form.notes|add_class:"ba-form-input" }}
+            </div>
+            <h3 class="ba-border-bottom-muted ba-pb-2 ba-mb-3 ">Exercises</h3>
+            {{ workout_exercise_formset.management_form }}
+            <div id="exercise-formset" class="ba-mb-4">
+                {% for form in workout_exercise_formset %}
+                    <div class="ba-flex ba-flex-wrap ba-justify-between ba-mb-3 ba-exercise-form">
+                        <div class="ba-form-group ba-w-25 ba-pr-2">
+                            <label for="{{ form.exercise.id_for_label }}" class="ba-form-label">Exercise</label>
+                            {{ form.exercise }}
+                        </div>
+                        <div class="ba-form-group ba-w-25 ba-px-2">
+                            <label for="{{ form.sets.id_for_label }}" class="ba-form-label">Sets</label>
+                            {{ form.sets }}
+                        </div>
+                        <div class="ba-form-group ba-w-25 ba-px-2">
+                            <label for="{{ form.reps.id_for_label }}" class="ba-form-label">Reps</label>
+                            {{ form.reps }}
+                        </div>
+                        <div class="ba-form-group ba-w-25 ba-px-2">
+                            <label for="{{ form.weight.id_for_label }}" class="ba-form-label">Weight (kg)</label>
+                            {{ form.weight }}
+                        </div>
+                        <div class="ba-form-group ba-w-25 ba-px-2">
+                            <label for="{{ form.distance.id_for_label }}" class="ba-form-label">Distance (km)</label>
+                            {{ form.distance }}
+                        </div>
+                        <div class="ba-form-group ba-w-25 ba-px-2">
+                            <label for="{{ form.duration.id_for_label }}" class="ba-form-label">Duration</label>
+                            {{ form.duration }}
+                        </div>
+                        <div class="ba-form-group ba-w-25 ba-px-2">
+                            <label for="{{ form.rest_time.id_for_label }}" class="ba-form-label">Rest Time</label>
+                            {{ form.rest_time }}
+                        </div>
+                        <div class="ba-form-group ba-w-25 ba-pl-2 ba-flex ba-items-end">
+                            <button type="button"
+                                    class="ba-btn ba-btn-outline ba-btn-sm ba-remove-exercise ba-w-100">Remove</button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="button" id="add-exercise" class="ba-btn ba-btn-outline ba-mb-4">Add Exercise</button>
+            <button type="submit" class="ba-btn ba-btn-primary">Add Workout</button>
+        </form>
+    </div>
+</div>
+<!-- Hidden template for new exercises -->
+<div id="empty-form" class="ba-hidden">
+    <div class="ba-border-top ba-pt-3 ba-flex ba-flex-wrap ba-justify-between ba-mb-3 ba-exercise-form">
+        <div class="ba-form-group ba-w-25 ba-pr-2">
+            <label for="{{ workout_exercise_formset.empty_form.exercise.id_for_label }}"
+                   class="ba-form-label">Exercise</label>
+            {{ workout_exercise_formset.empty_form.exercise }}
+        </div>
+        <div class="ba-form-group ba-w-25 ba-px-2">
+            <label for="{{ workout_exercise_formset.empty_form.sets.id_for_label }}"
+                   class="ba-form-label">Sets</label>
+            {{ workout_exercise_formset.empty_form.sets }}
+        </div>
+        <div class="ba-form-group ba-w-25 ba-px-2">
+            <label for="{{ workout_exercise_formset.empty_form.reps.id_for_label }}"
+                   class="ba-form-label">Reps</label>
+            {{ workout_exercise_formset.empty_form.reps }}
+        </div>
+        <div class="ba-form-group ba-w-25 ba-px-2">
+            <label for="{{ workout_exercise_formset.empty_form.weight.id_for_label }}"
+                   class="ba-form-label">Weight (kg)</label>
+            {{ workout_exercise_formset.empty_form.weight }}
+        </div>
+        <div class="ba-form-group ba-w-25 ba-px-2">
+            <label for="{{ workout_exercise_formset.empty_form.distance.id_for_label }}"
+                   class="ba-form-label">Distance (km)</label>
+            {{ workout_exercise_formset.empty_form.distance }}
+        </div>
+        <div class="ba-form-group ba-w-25 ba-px-2">
+            <label for="{{ workout_exercise_formset.empty_form.duration.id_for_label }}"
+                   class="ba-form-label">Duration</label>
+            {{ workout_exercise_formset.empty_form.duration }}
+        </div>
+        <div class="ba-form-group ba-w-25 ba-px-2">
+            <label for="{{ workout_exercise_formset.empty_form.rest_time.id_for_label }}"
+                   class="ba-form-label">Rest Time</label>
+            {{ workout_exercise_formset.empty_form.rest_time }}
+        </div>
+        <div class="ba-form-group ba-w-25 ba-pl-2 ba-flex ba-items-end">
+            <button type="button"
+                    class="ba-btn ba-btn-outline ba-btn-sm ba-remove-exercise ba-w-100">Remove</button>
+        </div>
+    </div>
+</div>
+<script>
+const exerciseFormset = document.getElementById('exercise-formset');
+const addExerciseBtn = document.getElementById('add-exercise');
+const emptyForm = document.getElementById('empty-form').firstElementChild;
+let formCount = {{ workout_exercise_formset.total_form_count }};
+
+// Update the management form's TOTAL_FORMS field
+function updateTotalForms() {
+    document.getElementById('id_workout_exercises-TOTAL_FORMS').value = formCount;
+}
+
+// Re-index all the form fields after adding/removing forms
+function reindexFormset() {
+    const forms = exerciseFormset.getElementsByClassName('ba-exercise-form');
+    for (let i = 0; i < forms.length; i++) {
+        forms[i].querySelectorAll('[name^="workout_exercises-"]').forEach(function(element) {
+            const nameAttr = element.getAttribute('name').replace(/-\d+-/, `-${i}-`);
+            element.setAttribute('name', nameAttr);
+            const idAttr = element.getAttribute('id').replace(/_\d+_/, `_${i}_`);
+            element.setAttribute('id', idAttr);
+        });
+    }
+}
+
+addExerciseBtn.addEventListener('click', function() {
+    const newForm = emptyForm.cloneNode(true);
+    newForm.innerHTML = newForm.innerHTML.replace(/__prefix__/g, formCount);
+    exerciseFormset.appendChild(newForm);
+    formCount++;
+    updateTotalForms();
+    reindexFormset();
+});
+
+exerciseFormset.addEventListener('click', function(e) {
+    if (e.target.classList.contains('ba-remove-exercise')) {
+        e.target.closest('.ba-exercise-form').remove();
+        formCount--;
+        updateTotalForms();
+        reindexFormset();
+    }
+});
+
+
+</script>

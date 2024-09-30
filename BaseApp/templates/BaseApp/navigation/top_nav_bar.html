@@ -1,0 +1,21 @@
+{% load static %}
+<nav class="ba-navbar">
+    <div class="ba-container ba-flex ba-items-center">
+        <a class="ba-navbar-brand" href="/">FittStorm</a>
+        <button class="ba-navbar-toggle"
+                aria-label="Toggle navigation"
+                aria-expanded="false"></button>
+        <div class="ba-navbar-items">
+            {% if user.is_authenticated %}
+                <a class="ba-navbar-item" href="{% url 'dashboard:base' %}">Dashboard</a>
+                <a class="ba-navbar-item" href="{% url 'workouts:base' %}">Workouts</a>
+                <a class="ba-navbar-item" href="{% url 'nutrition:base' %}">Nutrition</a>
+                <a class="ba-navbar-item" href="{% url 'UsersApp:profile' %}">Profile</a>
+            {% else %}
+                <a class="ba-navbar-item" href="{% url 'UsersApp:login' %}">Log In</a>
+                <a class="ba-navbar-item" href="{% url 'UsersApp:signup' %}">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+<script src="{% static 'BaseApp/navigation/top_nav_toggle.js' %}"></script>

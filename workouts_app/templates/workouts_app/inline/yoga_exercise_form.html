@@ -1,0 +1,24 @@
+{% load widget_tweaks %}
+<div class="ba-exercise-form ba-mb-3">
+    <div class="ba-flex ba-flex-wrap ba-justify-between">
+        <div class="ba-form-group ba-w-25 ba-pr-2">
+            <label for="{{ form.sets.id_for_label }}" class="ba-form-label">{{ form.sets.label }}</label>
+            {{ form.sets|add_class:"ba-form-input" }}
+        </div>
+        <div class="ba-form-group ba-w-25 ba-px-2">
+            <label for="{{ form.reps.id_for_label }}" class="ba-form-label">{{ form.reps.label }}</label>
+            {{ form.reps|add_class:"ba-form-input" }}
+        </div>
+        <div class="ba-form-group ba-w-25 ba-px-2">
+            <label for="{{ form.rest_time.id_for_label }}" class="ba-form-label">{{ form.rest_time.label }}</label>
+            {{ form.rest_time|add_class:"ba-form-input" }}
+        </div>
+        <div class="ba-form-group ba-w-25 ba-pl-2">
+            <label for="{{ form.focus.id_for_label }}" class="ba-form-label">{{ form.focus.label }}</label>
+            {{ form.focus|add_class:"ba-form-input" }}
+        </div>
+    </div>
+    <button type="button"
+            class="ba-btn ba-btn-outline ba-btn-sm ba-remove-exercise"
+            data-exercise-type="yoga">Remove</button>
+</div>
